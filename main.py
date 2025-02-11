@@ -1,15 +1,25 @@
-class WinDoor:
-    def __init__(self, width, height):
-        self.area = width * height
+from room import Room
 
-class Room:
-    def __init__(self, length, width, height):
-        self.length = length
-        self.width = width
-        self.height = height
-        self.windows = []
+# Ввод данных
+length = float(input("Введите длину комнаты (м): "))
+width = float(input("Введите ширину комнаты (м): "))
+height = float(input("Введите высоту комнаты (м): "))
 
-    def add_window(self, w, h):
-        self.windows.append(WinDoor(w, h))
+room = Room(length, width, height)
 
-    # Остальные методы как в уроке 7
+# Добавление окон/дверей
+while True:
+    choice = input("Добавить окно/дверь? (да/нет): ").lower()
+    if choice != 'да':
+        break
+    w = float(input("Ширина окна/двери (м): "))
+    h = float(input("Высота окна/двери (м): "))
+    room.add_window(w, h)
+
+# Расчет обоев
+roll_length = float(input("Длина одного рулона (м): "))
+roll_width = float(input("Ширина одного рулона (м): "))
+
+print("\nРезультаты:")
+print(f"Площадь для оклейки: {room.work_area():.2f} м²")
+print(f"Требуется рулонов: {room.rolls_needed(roll_length, roll_width)}")
